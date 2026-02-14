@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Forum Kurdistan</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+}
+
+header {
+    background: linear-gradient(to right, red, white, green);
+    color: black;
+    text-align: center;
+    padding: 20px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 30px auto;
+}
+
+.post-form {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.post-form input, .post-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+}
+
+.post-form button {
+    padding: 10px;
+    background: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.post-form button:hover {
+    background: darkgreen;
+}
+
+.post {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.post h3 {
+    margin: 0;
+}
+
+.post small {
+    color: gray;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>🌄 Forum Kurdistan</h1>
+    <p>Espace de discussion, culture, histoire et actualités</p>
+</header>
+
+<div class="container">
+
+    <div class="post-form">
+        <h2>Créer un message</h2>
+        <input type="text" id="username" placeholder="Ton nom">
+        <textarea id="message" rows="4" placeholder="Écris ton message..."></textarea>
+        <button onclick="addPost()">Publier</button>
+    </div>
+
+    <div id="posts"></div>
+
+</div>
+
+<script>
+function addPost() {
+    let username = document.getElementById("username").value;
+    let message = document.getElementById("message").value;
+
+    if(username === "" || message === "") {
+        alert("Remplis tous les champs !");
+        return;
+    }
+
+    let postDiv = document.createElement("div");
+    postDiv.className = "post";
+
+    let now = new Date();
+    let date = now.toLocaleString();
+
+    postDiv.innerHTML = `
+        <h3>${username}</h3>
+        <small>${date}</small>
+        <p>${message}</p>
+    `;
+
+    document.getElementById("posts").prepend(postDiv);
+
+    document.getElementById("username").value = "";
+    document.getElementById("message").value = "";
+}
+</script>
+
+</body>
+</html>
